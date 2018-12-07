@@ -21,20 +21,30 @@
         - [x] add button
         - accept a submit handler through props to get value from input
       - create local state in GroceryList.state.list
+        - [x] add default to constructor
+        - [x] render GroceryItem based on state.list
         - through the submit handler append to state.list
-        - render GroceryItem based on state.list
+
     */
       class GroceryList extends React.Component {
         constructor(props) {
-          super(props)
+          super(props);
+          this.state = {
+            list: ["toast", "bread"]
+          };
         }
         render() {
           return (
           <main>
-            <GroceryInput/>
+            <GroceryInput handleSubmit={(eventData) => {
+              console.log(newItemText)
+              eventData.preventDefault()
+              this.setState({
+                list: this.state.list.push(newItemText)
+              })
+            }} />
             <ul>
-              <GroceryItem name="candy toast"/>
-              <GroceryItem name="candy toast"/>
+              {this.state.list.map((itemText, itemIndex) => (<GroceryItem name={itemText} />))}
             </ul>
           </main>)
         }
@@ -55,8 +65,8 @@
         }
         render() {
           return(
-            <form>
-              <input type="text"/>
+            <form onSubmit={this.props.handleSubmit}>
+              <input type="text" name="itemText"/>
               <input type="submit"/>
             </form>
           )
