@@ -10,19 +10,33 @@
     <script src="babel.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <!-- <script type="text/babel" src="main.js" charset="utf-8"></script> -->
 
 
     <script type="text/babel" type="text/javascript">
+    /* @TODO
+    - [x] change to use JSX inside of grocery list Component
+    - add items to GroceryList
+      - create a GroceryInput component
+        - [x] text input
+        - [x] add button
+        - accept a submit handler through props to get value from input
+      - create local state in GroceryList.state.list
+        - through the submit handler append to state.list
+        - render GroceryItem based on state.list
+    */
       class GroceryList extends React.Component {
         constructor(props) {
           super(props)
         }
         render() {
-          return (<ul>
-            <GroceryItem name="candy toast"/>
-            <GroceryItem name="candy toast"/>
-          </ul>)
+          return (
+          <main>
+            <GroceryInput/>
+            <ul>
+              <GroceryItem name="candy toast"/>
+              <GroceryItem name="candy toast"/>
+            </ul>
+          </main>)
         }
       }
 
@@ -31,8 +45,21 @@
           super(props)
         }
         render() {
-          // return React.createElement('li', null, this.props.name)
           return(<li>{ this.props.name }</li>)
+        }
+      }
+
+      class GroceryInput extends React.Component {
+        constructor(props) {
+          super(props)
+        }
+        render() {
+          return(
+            <form>
+              <input type="text"/>
+              <input type="submit"/>
+            </form>
+          )
         }
       }
 
